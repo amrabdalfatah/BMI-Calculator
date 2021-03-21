@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_container.dart';
-
-const bottomContainerHeight = 60.0;
-const activeColorContainer = Color(0xff1d1e33);
-const inActiveColorContainer = Color(0xff111328);
-Color bottomColor = Colors.red.shade800;
+import 'constants.dart';
 
 enum Gender {
   male,
@@ -28,39 +24,36 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI Calculator'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableContainer(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.male;
                       });
                     },
-                    child: ReusableContainer(
-                      color: (selectedGender == Gender.male)? activeColorContainer : inActiveColorContainer,
-                      containerChild: ResueColumnSex(
-                        iconSex: FontAwesomeIcons.mars,
-                        textSex: 'MALE',
-                      ),
+                    color: (selectedGender == Gender.male) ? kActiveColorContainer : kInActiveColorContainer,
+                    containerChild: ResueColumnSex(
+                      iconSex: FontAwesomeIcons.mars,
+                      textSex: 'MALE',
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableContainer(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.female;
                       });
                     },
-                    child: ReusableContainer(
-                      color: (selectedGender == Gender.female)? activeColorContainer : inActiveColorContainer,
-                      containerChild: ResueColumnSex(
-                        iconSex: FontAwesomeIcons.venus,
-                        textSex: 'FEMALE',
-                      ),
+                    color: (selectedGender == Gender.female)? kActiveColorContainer : kInActiveColorContainer,
+                    containerChild: ResueColumnSex(
+                      iconSex: FontAwesomeIcons.venus,
+                      textSex: 'FEMALE',
                     ),
                   ),
                 )
@@ -69,7 +62,17 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: ReusableContainer(
-              color: activeColorContainer,
+              color: kActiveColorContainer,
+              containerChild: Column(
+                children: [
+                  Text('HEIGHT', style: kLabelTextStyle,),
+                  Row(
+                    children: [
+                      Text('170', style: kHeightVarStyle,),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
@@ -77,22 +80,22 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableContainer(
-                    color: activeColorContainer,
+                    color: kActiveColorContainer,
                   ),
                 ),
                 Expanded(
                   child: ReusableContainer(
-                    color: activeColorContainer,
+                    color: kActiveColorContainer,
                   ),
                 )
               ],
             ),
           ),
           Container(
-            color: bottomColor,
+            color: kBottomColor,
             margin: EdgeInsets.only(top: 10),
             width: double.infinity,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
           ),
         ],
       ),

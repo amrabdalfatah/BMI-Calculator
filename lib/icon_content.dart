@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
-const labelTextStyle = TextStyle(
-  fontSize: 18.0,
-  color: Color(0xff8d8e98),
-);
+import 'constants.dart';
 
 class ResueColumnSex extends StatelessWidget {
   final IconData iconSex;
@@ -23,7 +19,7 @@ class ResueColumnSex extends StatelessWidget {
         ),
         Text(
           textSex,
-          style: labelTextStyle,
+          style: kLabelTextStyle,
         ),
       ],
     );
