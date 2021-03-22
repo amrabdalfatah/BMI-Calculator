@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'input_page.dart';
+import 'result_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,11 +11,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         primaryColor: Color(0xff0A0E21),
         scaffoldBackgroundColor: Color(0xff0A0E21),
       ),
-      home: InputPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => InputPage(),
+        '/result': (context) => ResultScreen(),
+      },
     );
   }
 }

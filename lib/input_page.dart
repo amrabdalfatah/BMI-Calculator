@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_container.dart';
 import 'constants.dart';
+import 'bottom_button.dart';
+import 'round_icon.dart';
 
 enum Gender {
   male,
@@ -15,8 +17,10 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-
   Gender selectedGender;
+  int height = 170;
+  int weight = 60;
+  int age = 18;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +40,9 @@ class _InputPageState extends State<InputPage> {
                         selectedGender = Gender.male;
                       });
                     },
-                    color: (selectedGender == Gender.male) ? kActiveColorContainer : kInActiveColorContainer,
+                    color: (selectedGender == Gender.male)
+                        ? kActiveColorContainer
+                        : kInActiveColorContainer,
                     containerChild: ResueColumnSex(
                       iconSex: FontAwesomeIcons.mars,
                       textSex: 'MALE',
@@ -50,7 +56,9 @@ class _InputPageState extends State<InputPage> {
                         selectedGender = Gender.female;
                       });
                     },
-                    color: (selectedGender == Gender.female)? kActiveColorContainer : kInActiveColorContainer,
+                    color: (selectedGender == Gender.female)
+                        ? kActiveColorContainer
+                        : kInActiveColorContainer,
                     containerChild: ResueColumnSex(
                       iconSex: FontAwesomeIcons.venus,
                       textSex: 'FEMALE',
@@ -64,12 +72,38 @@ class _InputPageState extends State<InputPage> {
             child: ReusableContainer(
               color: kActiveColorContainer,
               containerChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('HEIGHT', style: kLabelTextStyle,),
+                  Text(
+                    'HEIGHT',
+                    style: kLabelTextStyle,
+                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
                     children: [
-                      Text('170', style: kHeightVarStyle,),
+                      Text(
+                        '$height',
+                        style: kNumberVarStyle,
+                      ),
+                      Text(
+                        'cm',
+                        style: kLabelTextStyle,
+                      ),
                     ],
+                  ),
+                  Slider(
+                    value: height.toDouble(),
+                    min: 120,
+                    max: 230,
+                    activeColor: kBottomColor,
+                    inactiveColor: kInActiveSlide,
+                    onChanged: (double newValue) {
+                      setState(() {
+                        height = newValue.round();
+                      });
+                    },
                   ),
                 ],
               ),
@@ -81,22 +115,93 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableContainer(
                     color: kActiveColorContainer,
+                    containerChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          '$weight',
+                          style: kNumberVarStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ReusableContainer(
                     color: kActiveColorContainer,
+                    containerChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'AGE',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          '$age',
+                          style: kNumberVarStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPress: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPress: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],
             ),
           ),
-          Container(
-            color: kBottomColor,
-            margin: EdgeInsets.only(top: 10),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-          ),
+          BottomButton(textButton: 'CALCULATE', onTap: () {
+            Navigator.pushNamed(context, '/result');
+          },),
         ],
       ),
     );

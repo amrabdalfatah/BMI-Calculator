@@ -12,10 +12,10 @@ class ResueColumnSex extends StatelessWidget {
       children: [
         Icon(
           iconSex,
-          size: 80.0,
+          size: 60.0,
         ),
         SizedBox(
-          height: 15.0,
+          height: 10.0,
         ),
         Text(
           textSex,
